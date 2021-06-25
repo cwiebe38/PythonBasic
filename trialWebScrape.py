@@ -29,3 +29,10 @@ gb = []
 player_stats = soup.find_all('tr', class_='MuiTableRow-root')
 
 
+#iterating through every line of player stats gathered
+for container in player_stats :
+
+    name = container.find('td', class_='MuiTableCell-root MuiTableCell-body jss58 MuiTable Cell-alignLeft')
+    names.append(name)
+
+print(names)
