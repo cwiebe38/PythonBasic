@@ -2,37 +2,48 @@
 # trialWebScrape.py
 # Attempting to write my first web scraping program using a tutorial from:
 # https://betterprogramming.pub/the-only-step-by-step-guide-youll-need-to-build-a-web-scraper-with-python-e79066bd895a
+# had trouble using the method above and switched to https://www.youtube.com/watch?v=15f4JhJ8SiQ for the reading in
 
 import requests
 from requests import get
 from bs4 import BeautifulSoup
+import lxml.html as lh
 import pandas as pd
 import numpy as np
 
 #getting the website that I want to scrape from
-url = "https://stats.premierlacrosseleague.com/player-table"
+url = "https://www.insidelacrosse.com/team/tufts/2021"
 results = requests.get(url)
+#print(results.status_code)
 
 #getting the url data in a readable manner
 soup = BeautifulSoup(results.text, "html.parser")
+#print(soup)
 
-#Initializing my storage
-names = []
-gp = []
-goals = []
-points = []
-assists = []
-turnovers = []
-gb = []
+# Finding the data table in the HTML code
+tufts_table = soup.find('table', class_= "table table-striped m-b-0")
+#print(tufts_table)
 
-#getting each line of the player data
-player_stats = soup.find_all('tr', class_='MuiTableRow-root')
+#Looping throug rows and then individual cells to gather desired information
+for team in tufts_table.find_all('tbody') :
+    rows = team.find_all('tr')
+    for row in rows :
+        number = row.find('td').text.strip()
+        name = row.find_all('td')[1].text.strip()
+        position = row.find_all('td')[2].text.strip()
+        goals = row.find_all('td')[5].text.strip()
+        assists = row.find_all('td')[6].text.strip()
+        points = row.find_all('td')[7].text.strip()
+        #print(number, name, position, points, goals, assists)
 
 
-#iterating through every line of player stats gathered
-for container in player_stats :
+tufts_stats = pd.DataFrame({
+    'Number' : number,
+    'Name' : name,
+    'Position' : position,
+    'Points' : points,
+    'Goals' : goals,
+    'Assists' : assists
+})
 
-    name = container.find('td', class_='MuiTableCell-root MuiTableCell-body jss58 MuiTable Cell-alignLeft')
-    names.append(name)
-
-print(names)
+print(tufts_stats)
