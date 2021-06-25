@@ -5,7 +5,6 @@
 import string
 import random
 
-print(''.join(random.choice(string.ascii_letters) for i in range(10)))
 # Getting the users name
 Name = input("What is your name: ")
 
@@ -13,21 +12,33 @@ Name = input("What is your name: ")
 password = input("Would you like a password? ")
 
 if password == "yes":
+
+    #basic password generator
     length = input("How long do you want your password to be? ")
     size = int(length)
     print(f'Ok {Name} your new password is: ')
     print(''.join(random.choice(string.ascii_letters + string.digits + string.punctuation) for i in range(size)))
 elif password == "advanced":
+
+    #password generator with specific numbers of each of the character types
     length = input("How long do you want your password to be? ")
     size = int(length)
     letters = input("How many letters do you want in your password? ")
-    lets = string.ascii_letters
     numbers = input("How many numbers do you want in your password? ")
-    nums = string.digits
-    characs =  input("How many special characters do you want in your password? ")
-    chars = string.punctuation
-    print(f'You want a password of {length} length with {letters} letters, {numbers} numbers and {characs} characters')
+
+    #turning the inputs to ints
+    lets = int(letters)
+    nums = int(numbers)
+
+    if lets + nums > size:
+        print('That is too many numbers and letters')
+        exit()
+    chars = size - lets - nums
+
+    print(f'You want a password of {size} length with {lets} letters, {nums} numbers and {chars} special characters')
+    print(f'I don\'t feel like coding that so you\'re getting a password length {size}: ')
+    print(''.join(random.choice(string.ascii_letters + string.digits + string.punctuation) for i in range(size)))
 else:
     print('Ok bye.')
-    
-    
+print('Ok bye.')
+exit()
