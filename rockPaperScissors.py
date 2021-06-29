@@ -21,25 +21,25 @@ def generatePlay():
 # Determines who won the round
 def roundWinner(pPlay, cPlay):
     if(pPlay == cPlay):
-        print('We picked the same play. Redo')
+        print('We picked the same play. Redo\n')
         return 0
     elif(pPlay == 'rock' and cPlay == 'scissors'):
-        print('I chose scissors. You win that round. Nice job.')
+        print('\nI chose scissors. You win that round. Nice job. \n')
         return 1
     elif(pPlay == 'scissors' and cPlay == 'paper'):
-        print('I chose scissors. You win that round. Nice job.')
+        print('\nI chose scissors. You win that round. Nice job.\n')
         return 1
     elif(pPlay == 'paper' and cPlay == 'rock'):
-        print('I chose scissors. You win that round. Nice job.')
+        print('\nI chose scissors. You win that round. Nice job.\n')
         return 1
     else:
-        print(f'I picked {cPlay} so I win. Better luck next time.')
+        print(f'\nI picked {cPlay} so I win. Better luck next round.\n')
         return 2
 
 #Basic intro to the game
 name = input('What is your name?: ')
-print(f'Alright {name} let\'s play a game of rock paper scissors.')
-print('The game is best of 5. If you win 3 rounds you win the game.')
+print(f'\nAlright {name} let\'s play a game of rock paper scissors.')
+print('The game is best of 5. If you win 3 rounds you win the game.\n')
 
 # Intitializing the variables needed to determine end of game
 gameOver = False
@@ -49,9 +49,9 @@ comp = 0
 # Main bulk of the game running
 while(gameOver == False):
     # Gathering the players play and determining if it's valid
-    pPlay = input('rock, paper or scissors? :')
-    if(pPlay != 'rock' or pPlay != 'paper', pPlay != 'scissors'):
-        print('That\'s not a valid play. You lose. Bye')
+    pPlay = input('rock, paper or scissors?: ')
+    if(pPlay != 'rock' and pPlay != 'paper' and pPlay != 'scissors'):
+        print('\nThat\'s not a valid play. You lose. Bye')
         exit()
     
     # Generating computers play and who won the round
@@ -66,8 +66,8 @@ while(gameOver == False):
 
     # Determining if someone has won
     if(player == 3):
-        print('You win! You outplayed me. Congratulations. Bye.')
+        print('\nYou win! You outplayed me. Congratulations. Bye.')
         gameOver = True
     elif(comp == 3):
-        print('I win! Take that. Bye')
+        print('\nI win! Take that. Bye')
         gameOver = True
