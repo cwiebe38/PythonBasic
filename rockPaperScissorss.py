@@ -5,35 +5,18 @@ import random
 # RockPaperScissors.py
 # Simple rock paper scissors game
 # Working on input/output, randomization, while loops and if else
-
-
-
-# Uses random number generation to create the computers play
-def generatePlay():
-    compPlay = random.randint(0,3)
-    if(compPlay == 1):
-        return 'rock'
-    elif(compPlay == 2):
-        return 'paper'
-    else:
-        return 'scissors'
+# Same thing as the other rps except this one the player can't win
 
 # Determines who won the round
-def roundWinner(pPlay, cPlay):
-    if(pPlay == cPlay):
-        print('We picked the same play. Redo\n')
-        return 0
-    elif(pPlay == 'rock' and cPlay == 'scissors'):
-        print('\nI chose scissors. You win that round. Nice job. \n')
-        return 1
-    elif(pPlay == 'scissors' and cPlay == 'paper'):
-        print('\nI chose paper. You win that round. Nice job.\n')
-        return 1
-    elif(pPlay == 'paper' and cPlay == 'rock'):
-        print('\nI chose rock. You win that round. Nice job.\n')
-        return 1
-    else:
-        print(f'\nI picked {cPlay} so I win. Better luck next round.\n')
+def roundWinner(pPlay):
+    if(pPlay == 'rock'):
+        print('I picked paper so I won that round. Better luck next time.')
+        return 2
+    elif(pPlay == 'scissors'):
+        print('I picked rock so I won that round. Better luck next time.')
+        return 2
+    elif(pPlay == 'paper'):
+        print('I picked scissors so I won that round. Better luck next time.')
         return 2
 
 #Basic intro to the game
@@ -55,8 +38,7 @@ while(gameOver == False):
         exit()
     
     # Generating computers play and who won the round
-    cPlay = generatePlay()
-    winner = roundWinner(pPlay=pPlay, cPlay= cPlay)
+    winner = roundWinner(pPlay=pPlay)
 
     # Tallying the number of round wins
     if(winner == 1):
