@@ -31,7 +31,6 @@ def valid(bo, pos, num):
     for i in range(rbox*3, rbox*3 + 3):
         for j in range(cbox*3, cbox*3 + 3):
             if(bo[i][j] == num and i != pos[0] and j != pos[1]):
-                print(str(i) + ' ' + str(j))
                 return False
 
     
@@ -54,10 +53,10 @@ def solver(bo):
         if valid(bo, (row, col), i):
             bo[row][col] = i
         
-        if solver(bo):
-            return True
+            if solver(bo):
+                return True
 
-        bo[row][col] = 0
+            bo[row][col] = 0
 
     return False
 
