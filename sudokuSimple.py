@@ -76,6 +76,7 @@ def print_board(bo):
                 print(str(bo[i][j]) + ' |')
             else:
                 print(str(bo[i][j]) + ' ', end='')
+    print('- - - - - - - - - - - -')
 
 board = [
     [7, 8, 0, 4, 0, 0, 1, 2, 0],
@@ -100,9 +101,10 @@ board = [
 #     [0, 0, 0, 0, 0, 0, 0, 0, 0],
 #     [0, 0, 0, 0, 0, 0, 0, 0, 0]
 # ]
-
+print('Here is the board: \n')
 print_board(board)
-print('Now we bout to solve this jaunt')
+print('Now we will solve the puzzle.')
+print('Here is the solved puzzle: \n')
 solver(board)
 print_board(board)
 
