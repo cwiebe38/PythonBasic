@@ -25,6 +25,7 @@ class Grid:
         self.cols = cols
         self.win = win
         self.cubes = [[Cube(self.board[i][j], i, j, width, height) for j in range(cols)] for i in range(rows)]
+        self.selected = None
 
     #Drawing out the lines of the grid, eventually will draw the numbers/blanks/corner numbers in
     def draw(self):
@@ -73,6 +74,28 @@ class Cube:
         elif not(self.value == 0):
             text = fnt.render(str(self.value), 1, (0, 0, 0))
             win.blit(text, (x + (gap/2 - text.get_width()/2) + 50, y + (gap/2 - text.get_height()/2) + 50))
+
+    def draw_change(self, win, g = True):
+        fnt = pygame.font.SysFont("comicsans", 40)
+
+        gap = self.width / 9
+        x = self.col * gap
+        y = self.row * gap
+
+        pygame.draw.rect(win, (255, 255, 255), (x, y, gap, gap), 0)
+
+        text = fnt.render(str(self.value), 1, (0, 0, 0))
+        win.blit(text, (x + (gap/2 - text.get_width()/2) + 50, y + (gap/2 - text.get_height()/2) + 50))
+        if g:
+            pygame.draw.rect(win, (0, 255, 0), (x, y, gap, gap), 3)
+        else:
+            pygame.draw.rect(win, (255, 0, 0), (x, y, gap, gap), 3)
+
+    def set(self, val):
+        self.value = val
+
+    def set_temp(self, temp):
+        self.temp = temp
 
 def main():
 
